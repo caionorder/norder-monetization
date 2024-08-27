@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html <?php language_attributes(); ?>>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1, minimum-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
+<link rel='stylesheet' type='text/css' href='<?php echo esc_url(get_stylesheet_directory_uri()); ?>/style.css' />
+
+<?php wp_head(); ?>
+
+<style type="text/css">
+	#header{
+		background: <?php echo esc_attr(get_theme_mod('header_color','#FFF')); ?>;
+		color:<?php echo esc_attr(get_theme_mod('header_color_text','#FFF')); ?>;
+	}
+	a.link{
+		background: <?php echo esc_attr(get_theme_mod('header_color','#FFF')); ?>;
+		color:<?php echo esc_attr(get_theme_mod('header_color_text','#FFF')); ?>;
+	}
+	#footer{
+		background: <?php echo esc_attr(get_theme_mod('footer_color','#FFF')); ?>;
+		color:<?php echo esc_attr(get_theme_mod('footer_color_text','#FFF')); ?>;
+	}
+	#container{
+		background: <?php echo esc_attr(get_theme_mod('body_color','#FFF')); ?>;
+		color:<?php echo esc_attr(get_theme_mod('body_color_text','#FFF')); ?>;
+	}
+</style>
+
+</head>
+
+<body <?php body_class(); ?>>
+	<?php wp_body_open() ?>
+<header id="header">
+    <div class="container">
+        <section id="logo_site">
+		<?php
+		$logo_info = get_custom_logo_info();
+		$site_name = get_bloginfo('name');
+		$site_description = get_bloginfo('description');
+		if ($logo_info['url']) {
+		    echo '<a href="' . esc_url(home_url('/')) . '" rel="home" itemprop="url">';
+		    echo '<img src="' . esc_url($logo_info['url']) . '" 
+		              width="' . esc_attr($logo_info['width']) . '" 
+		              height="' . esc_attr($logo_info['height']) . '" 
+		              alt="' . esc_attr($site_name) . ' - ' . esc_attr($site_description) . '" 
+		              itemprop="logo">';
+		    echo '</a>';
+		} else {
+		    echo '<h1 class="site-title"><a href="' . esc_url(home_url('/')) . '" rel="home" itemprop="url">' . esc_html($site_name) . '</a></h1>';
+		    echo '<p class="site-description">' . esc_html($site_description) . '</p>';
+		}
+		?>
+        </section>
+        <section id="menu_topo">
+            <nav role="navigation" aria-label="Menu principal">
+                <?php
+                wp_nav_menu(array(
+                    'theme_location' => 'primary',
+                    'menu_class'     => 'primary-menu',
+                    'container'      => false,
+                    'fallback_cb'    => false,
+                ));
+                ?>
+            </nav>
+        </section>
+    </div>
+</header>
