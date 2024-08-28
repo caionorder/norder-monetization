@@ -60,17 +60,17 @@
     </article>
 </section>
 
-<section id="container" style="min-height:auto !important">
+<section id="container_news" style="min-height:auto !important">
     <article class="container">
     <!-- Seção: Últimos Posts -->
     <section class="latest-posts">
         <div class="head-card">
-            <h2><?php esc_html_e('Últimos Posts', 'norder-monetization'); ?></h2>
+            <h2 style="text-align:center;text-transform: uppercase;letter-spacing: 2px;"><?php esc_html_e('Relacionados', 'norder-monetization'); ?></h2>
         </div>
         <div class="body-card">
         <?php
         $latest_posts = new WP_Query(array(
-            'posts_per_page' => 4,
+            'posts_per_page' => 3,
             'orderby' => 'rand',
             'post__not_in' => array(get_the_ID())
         ));
@@ -79,12 +79,13 @@
             while ($latest_posts->have_posts()) : $latest_posts->the_post();
         ?>
             <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-                <header class="entry-header">
-                    <h3 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-                </header>
-                <div class="entry-summary">
-                    <p><?php echo get_the_date(); ?> - <?php echo get_the_excerpt(); ?></p>
-                </div>
+                        <?php if (has_post_thumbnail()) : ?>
+                            <a href="<?php the_permalink(); ?>" class="post-thumbnail">
+                                <?php custom_post_thumbnail(); ?>
+                            </a>
+                        <?php endif; ?>
+                        <header class="entry-header"><h3 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3></header>
+                        <div class="entry-summary"><p style="font-size:12px;"><?php echo get_the_excerpt(); ?></p></div>
             </article>
         <?php
             endwhile;

@@ -7,6 +7,9 @@
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="profile" href="http://gmpg.org/xfn/11" />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
+<link rel="preload" href="fonts/Poppins-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/Poppins-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/Poppins-Light.woff2" as="font" type="font/woff2" crossorigin>
 
 <?php wp_head(); ?>
 

@@ -6,7 +6,7 @@ Template Name: Home Page
 get_header();
 ?>
 
-<section id="container">
+<section id="container" style="min-height:auto">
 
 
 <main id="main" class="site-main home-page container" role="main">
@@ -45,15 +45,21 @@ get_header();
         ?>
         </div>
     </section>
+	</main>
+</section>
 
     <!-- Seção: Quem Somos -->
     <section class="about-us">
-        <h2><?php echo wp_kses_post(get_theme_mod('about_us_title', 'Configure esta seção no Personalizador.')); ?></h2>
-        <div class="about-content">
-            <?php echo wp_kses_post(get_theme_mod('about_us_content', 'Configure esta seção no Personalizador.')); ?>
-        </div>
+		<article>
+			<h2><?php echo wp_kses_post(get_theme_mod('about_us_title', 'Configure esta seção no Personalizador.')); ?></h2>
+			<div class="about-content">
+				<?php echo wp_kses_post(get_theme_mod('about_us_content', 'Configure esta seção no Personalizador.')); ?>
+			</div>
+		</article>
     </section>
 
+<section id="container" style="min-height:auto">
+	<main id="main" class="site-main home-page container" role="main">
     <?php
     // Seção: Posts por Categoria
     $categories = get_categories(array('exclude' => array(1))); // Exclui a categoria "Uncategorized"
@@ -61,7 +67,7 @@ get_header();
     foreach ($categories as $category) :
         $category_posts = new WP_Query(array(
             'cat' => $category->term_id,
-            'posts_per_page' => 4,
+            'posts_per_page' => 3,
             'offset' => 1, // Ignora o post mais recente
             'orderby' => 'rand'
         ));
@@ -82,12 +88,8 @@ get_header();
                                 <?php custom_post_thumbnail(); ?>
                             </a>
                         <?php endif; ?>
-                        <header class="entry-header">
-                            <h3 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-                        </header>
-                        <div class="entry-summary">
-                            <p><?php echo get_the_date(); ?> - <?php echo get_the_excerpt(); ?></p>
-                        </div>
+                        <header class="entry-header"><h3 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3></header>
+                        <div class="entry-summary"><p style="font-size:12px"><?php echo get_the_date(); ?> - <?php echo get_the_excerpt(); ?></p></div>
                     </article>
                 <?php
                 endwhile;
