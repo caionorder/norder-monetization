@@ -213,8 +213,33 @@ function theme_customize_register($wp_customize) {
         'section'  => 'about_us_section',
         'type'     => 'textarea',
     ));
+
+    // Adiciona campo para a cor de fundo
+    $wp_customize->add_setting('about_us_background_color', array(
+        'default'           => '#ffffff',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'about_us_background_color', array(
+        'label'    => __('Cor de Fundo', 'norder-monetization'),
+        'section'  => 'about_us_section',
+        'settings' => 'about_us_background_color',
+    )));
+
+    // Adiciona campo para a cor da letra
+    $wp_customize->add_setting('about_us_text_color', array(
+        'default'           => '#000000',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'about_us_text_color', array(
+        'label'    => __('Cor da Letra', 'norder-monetization'),
+        'section'  => 'about_us_section',
+        'settings' => 'about_us_text_color',
+    )));
 }
 add_action('customize_register', 'theme_customize_register');
+
 
 
 function disable_wp_emojicons() {

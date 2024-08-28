@@ -48,7 +48,7 @@ get_header();
 
     <!-- Seção: Quem Somos -->
     <section class="about-us">
-        <h2><?php esc_html_e('Quem Somos', 'norder-monetization'); ?></h2>
+        <h2><?php echo wp_kses_post(get_theme_mod('about_us_title', 'Configure esta seção no Personalizador.')); ?></h2>
         <div class="about-content">
             <?php echo wp_kses_post(get_theme_mod('about_us_content', 'Configure esta seção no Personalizador.')); ?>
         </div>

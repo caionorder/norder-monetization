@@ -311,7 +311,7 @@ article.container > header, article.container > footer{
 	height: auto;
 }
 .container{
-	max-width: 960px;
+	max-width: 1200px;
 	width:100%;
 	margin:0 auto;
 	display: flex;
@@ -674,3 +674,6 @@ a.link{
 	letter-spacing: 1px;
     color: #555;
 }
+	#container img{
+		border-radius: 10px;
+	}

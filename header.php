@@ -33,13 +33,18 @@
 		background: <?php echo esc_attr(get_theme_mod('footer_color','#FFF')); ?>;
 		color:<?php echo esc_attr(get_theme_mod('footer_color_text','#FFF')); ?>;
 	}
-	#footer p {
-		color:<?php echo esc_attr(get_theme_mod('footer_color_text','#FFF')); ?>;
+	#footer p, #footer a, .privacy-policy-link {
+		color:<?php echo esc_attr(get_theme_mod('footer_color_text','#FFF')); ?> !important;
 	}
 	#container{
 		background: <?php echo esc_attr(get_theme_mod('body_color','#FFF')); ?>;
 		color:<?php echo esc_attr(get_theme_mod('body_color_text','#FFF')); ?>;
 	}
+	.about-us {
+        background-color: <?php echo esc_attr(get_theme_mod('about_us_background_color', '#ffffff')); ?>;
+        color: <?php echo esc_attr(get_theme_mod('about_us_text_color', '#000000')); ?>;
+    }
+	
 </style>
 
 </head>
