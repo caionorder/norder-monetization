@@ -4,7 +4,7 @@ Theme URI: https://clubnews24.com/
 Description: Theme for monetization in Ads
 Author: Caio Norder
 Author URI: https://norder.dev
-Version: 1.0
+Version: 1.1.4
 Tags: blog
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -227,6 +227,12 @@ a:hover {
 }
 
 /* THEME BY CAIO */
+section#container > article.container, section#container > main#main{
+	background: #FFF;
+	padding: 20px;
+	border-radius: 10px;
+	box-sizing: border-box;
+}
 #header, #footer{
 	width: 100%;
 	background:#006198;
@@ -617,6 +623,7 @@ a.link{
 	    height: 24px;	    
 	    margin-right: 10px; /* Espaço entre o ícone e o nav */
 	    cursor: pointer; /* Indica que o ícone é interativo */
+		padding:10px;
 	}
 
 	#menu_topo > nav > ul {
@@ -646,4 +653,24 @@ a.link{
         font-size: 0.8125rem; /* 16.25px */
     }
 
+}
+
+.entry-header h1, .head-card h2, .about-us h2{
+	margin-top:0;
+	margin-bottom:0;
+}
+.separador::after, .separador::before {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #d9d9d9;
+}
+.separador{
+	font-size: 9px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+	min-height:20px;
+	white-space: nowrap;
+	letter-spacing: 1px;
+    color: #555;
 }

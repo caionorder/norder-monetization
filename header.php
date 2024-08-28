@@ -7,7 +7,6 @@
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="profile" href="http://gmpg.org/xfn/11" />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-<link rel='stylesheet' type='text/css' href='<?php echo esc_url(get_stylesheet_directory_uri()); ?>/style.css' />
 
 <?php wp_head(); ?>
 
@@ -16,12 +15,25 @@
 		background: <?php echo esc_attr(get_theme_mod('header_color','#FFF')); ?>;
 		color:<?php echo esc_attr(get_theme_mod('header_color_text','#FFF')); ?>;
 	}
+	#header #menu_topo a{
+		color:<?php echo esc_attr(get_theme_mod('header_color_text','#FFF')); ?>;
+		text-decoration:none;
+	}
+	.entry-title a, .entry-categories a, .posted-on a {
+		color:<?php echo esc_attr(get_theme_mod('header_color_text','#FFF')); ?>;
+	}
+	#menu_topo > nav::before{
+		background: <?php echo esc_attr(get_theme_mod('header_color_text','#FFF')); ?>;
+	}
 	a.link{
 		background: <?php echo esc_attr(get_theme_mod('header_color','#FFF')); ?>;
 		color:<?php echo esc_attr(get_theme_mod('header_color_text','#FFF')); ?>;
 	}
 	#footer{
 		background: <?php echo esc_attr(get_theme_mod('footer_color','#FFF')); ?>;
+		color:<?php echo esc_attr(get_theme_mod('footer_color_text','#FFF')); ?>;
+	}
+	#footer p {
 		color:<?php echo esc_attr(get_theme_mod('footer_color_text','#FFF')); ?>;
 	}
 	#container{

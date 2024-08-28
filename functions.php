@@ -97,9 +97,13 @@ add_action('wp_enqueue_scripts', 'theme_scripts');
 
 // Adicionar opções ao Personalizador
 function theme_customizer_options($wp_customize) {
+    $wp_customize->remove_section('colors');
+    $wp_customize->remove_section('header_image');
+    $wp_customize->remove_section('background_image');
+    
     // Seção de Identidade do Site
     $wp_customize->add_section('site_identity', array(
-        'title' => __('Cores do Site', 'norder-monetization'),
+        'title' => __('Cores', 'norder-monetization'),
         'priority' => 30,
     ));
 
@@ -155,7 +159,6 @@ function theme_customizer_options($wp_customize) {
         'type' => 'radio',
         'choices' => array(
             'posts' => __('Posts da Página Principal', 'norder-monetization'),
-            'page' => __('Página Personalizada', 'norder-monetization'),
         ),
     ));
 }
@@ -187,6 +190,18 @@ function theme_customize_register($wp_customize) {
         'priority' => 30,
     ));
 
+    // Adiciona campo para o título de "Quem Somos"
+    $wp_customize->add_setting('about_us_title', array(
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    
+    $wp_customize->add_control('about_us_title', array(
+        'label'    => __('Título', 'norder-monetization'),
+        'section'  => 'about_us_section',
+        'type'     => 'text',
+    ));
+
     // Adiciona campo para o conteúdo de "Quem Somos"
     $wp_customize->add_setting('about_us_content', array(
         'default'           => '',
@@ -200,6 +215,7 @@ function theme_customize_register($wp_customize) {
     ));
 }
 add_action('customize_register', 'theme_customize_register');
+
 
 function disable_wp_emojicons() {
     remove_action('wp_head', 'print_emoji_detection_script', 7);

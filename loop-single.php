@@ -12,10 +12,12 @@
             <?php
             echo 'Publicado em ';
             echo '<time class="entry-date published" datetime="' . esc_attr( get_the_date( 'c' ) ) . '">' . esc_html( get_the_date() ) . '</time>';
+            echo ' por ' . get_the_author_posts_link();
             ?>
         </span>      
     </div>
 </header>
+
 
 <div class="entry-content">
     <?php
@@ -71,11 +73,6 @@
             while ($latest_posts->have_posts()) : $latest_posts->the_post();
         ?>
             <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-                <?php if (has_post_thumbnail()) : ?>
-                    <a href="<?php the_permalink(); ?>" class="post-thumbnail">
-                        <?php the_post_thumbnail('large'); ?>
-                    </a>
-                <?php endif; ?>
                 <header class="entry-header">
                     <h3 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
                 </header>
