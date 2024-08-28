@@ -1,4 +1,4 @@
-=== Blossom Pin ===
+=== Norder Monetization ===
 
 Theme Name: Norder Monetization
 Theme URI: https://clubnews24.com/
