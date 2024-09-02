@@ -325,3 +325,155 @@ function custom_post_thumbnail($size = 'medium', $class = 'wp-post-image') {
         echo '<img src="' . esc_url(get_template_directory_uri() . '/images/default-thumbnail.jpg') . '" class="' . esc_attr($class) . '" width="300" height="200" alt="' . esc_attr__('Default Thumbnail', 'norder-monetization') . '">';
     }
 }
+
+function theme_loader_customizer($wp_customize) {
+    // Adiciona uma nova seção para as configurações do Loader
+    $wp_customize->add_section('loader_settings', array(
+        'title'    => __('Configurações do Loader', 'norder-monetization'),
+        'priority' => 30,
+    ));
+
+    // Adiciona configuração para ativar/desativar o Loader
+    $wp_customize->add_setting('loader_active', array(
+        'default'           => false,
+        'sanitize_callback' => 'wp_validate_boolean',
+    ));
+
+    $wp_customize->add_control('loader_active', array(
+        'label'    => __('Ativar Loader', 'norder-monetization'),
+        'section'  => 'loader_settings',
+        'type'     => 'checkbox',
+    ));
+
+    // Adiciona configuração para a cor do Loader
+    $wp_customize->add_setting('loader_color', array(
+        'default'           => '#ff0000',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'loader_color', array(
+        'label'    => __('Loader Cor', 'norder-monetization'),
+        'section'  => 'loader_settings',
+        'settings' => 'loader_color',
+    )));
+
+    // Adiciona configuração para o tempo do Loader
+    $wp_customize->add_setting('loader_time', array(
+        'default'           => 5,
+        'sanitize_callback' => 'absint',
+    ));
+
+    $wp_customize->add_control('loader_time', array(
+        'label'       => __('Loader (segundos para aguardar o anúncio)', 'norder-monetization'),
+        'section'     => 'loader_settings',
+        'type'        => 'number',
+        'input_attrs' => array(
+            'min'  => 1,
+            'max'  => 10,
+            'step' => 1,
+        ),
+    ));
+
+    // Adiciona configuração para o tempo do Home Loader
+    $wp_customize->add_setting('home_loader_time', array(
+        'default'           => 3,
+        'sanitize_callback' => 'absint',
+    ));
+
+    $wp_customize->add_control('home_loader_time', array(
+        'label'       => __('Home Loader (segundos para aguardar o anúncio)', 'norder-monetization'),
+        'section'     => 'loader_settings',
+        'type'        => 'number',
+        'input_attrs' => array(
+            'min'  => 1,
+            'max'  => 10,
+            'step' => 1,
+        ),
+    ));
+
+    // Adiciona configuração para o nome do AdUnit
+    $wp_customize->add_setting('adunit_name', array(
+        'default'           => 'Content1',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+
+    $wp_customize->add_control('adunit_name', array(
+        'label'       => __('AdUnit Name (Nome do bloco ex: Content1)', 'norder-monetization'),
+        'section'     => 'loader_settings',
+        'type'        => 'text',
+    ));
+}
+add_action('customize_register', 'theme_loader_customizer');
+
+function enqueue_theme_js() {
+    wp_enqueue_script('theme-js', get_template_directory_uri() . '/theme.js', array(), '1.0.0', true);
+    
+    $loader_active = get_theme_mod('loader_active', false);
+    $meta_ads_active = get_theme_mod('meta_ads_active', false);
+    $meta_pixel_id = get_theme_mod('meta_pixel_id', '');
+    $meta_pixel_token = get_theme_mod('meta_pixel_token', '');
+
+    $theme_config = array();
+
+    if ($loader_active) {
+        $theme_config['NorderLoader'] = array(
+            'adUnit' => get_theme_mod('adunit_name', 'Content1'),
+            'timeout' => get_theme_mod('loader_time', 5) * 1000,
+            'loaderId' => 'joinadsloader__wrapper'
+        );
+    }
+
+    if ($meta_ads_active && !empty($meta_pixel_id) && !empty($meta_pixel_token)) {
+        $theme_config['metaPixel'] = array(
+            'pixelId' => $meta_pixel_id
+        );
+    }
+
+    wp_localize_script('theme-js', 'themeConfig', $theme_config);
+}
+add_action('wp_enqueue_scripts', 'enqueue_theme_js');
+
+function theme_meta_ads_customizer($wp_customize) {
+    // Adiciona uma nova seção para as configurações de Meta Ads
+    $wp_customize->add_section('meta_ads_settings', array(
+        'title'    => __('Meta Ads', 'norder-monetization'),
+        'priority' => 30,
+    ));
+
+    // Adiciona configuração para ativar/desativar Meta Ads
+    $wp_customize->add_setting('meta_ads_active', array(
+        'default'           => false,
+        'sanitize_callback' => 'wp_validate_boolean',
+    ));
+
+    $wp_customize->add_control('meta_ads_active', array(
+        'label'    => __('Ativar Meta Ads', 'norder-monetization'),
+        'section'  => 'meta_ads_settings',
+        'type'     => 'checkbox',
+    ));
+
+    // Adiciona configuração para o Pixel ID
+    $wp_customize->add_setting('meta_pixel_id', array(
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+
+    $wp_customize->add_control('meta_pixel_id', array(
+        'label'       => __('Pixel ID', 'norder-monetization'),
+        'section'     => 'meta_ads_settings',
+        'type'        => 'text',
+    ));
+
+    // Adiciona configuração para o Pixel Token
+    $wp_customize->add_setting('meta_pixel_token', array(
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+
+    $wp_customize->add_control('meta_pixel_token', array(
+        'label'       => __('Pixel Token', 'norder-monetization'),
+        'section'     => 'meta_ads_settings',
+        'type'        => 'text',
+    ));
+}
+add_action('customize_register', 'theme_meta_ads_customizer');

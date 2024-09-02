@@ -21,7 +21,7 @@
 	#header{
 		background: <?php echo esc_attr(get_theme_mod('header_color','#FFF')); ?>;
 		color:<?php echo esc_attr(get_theme_mod('header_color_text','#FFF')); ?>;
-	}
+	}	
 	#header #menu_topo a{
 		color:<?php echo esc_attr(get_theme_mod('header_color_text','#FFF')); ?>;
 		text-decoration:none;
@@ -54,13 +54,24 @@
         background-color: <?php echo esc_attr(get_theme_mod('about_us_background_color', '#ffffff')); ?>;
         color: <?php echo esc_attr(get_theme_mod('about_us_text_color', '#000000')); ?>;
     }
+
+	<?php $loader_active = get_theme_mod('loader_active', false); ?>
+	<?php if($loader_active) { ?>
+	#joinadsloader__spinner{
+		border-top:8px solid <?php echo esc_attr(get_theme_mod('loader_color', '#ff0000')); ?>;
+	}
+	<?php } ?>
 	
 </style>
 
 </head>
 
 <body <?php body_class(); ?>>
-	<?php wp_body_open() ?>
+<?php if($loader_active) { ?>
+<div id="joinadsloader__wrapper"><div id="joinadsloader__spinner"></div></div>
+<?php } ?>
+
+<?php wp_body_open() ?>
 <header id="header">
     <div class="container">
         <section id="logo_site">

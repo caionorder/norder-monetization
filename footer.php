@@ -43,5 +43,12 @@
     </div>
 </footer>
 <?php wp_footer(); ?>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    if (typeof themeConfig !== 'undefined') {
+        initializeTheme(themeConfig);
+    }
+});
+</script>
 </body>
 </html>
