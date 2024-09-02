@@ -7,9 +7,13 @@
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="profile" href="http://gmpg.org/xfn/11" />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-<link rel="preload" href="fonts/Poppins-Regular.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/Poppins-Bold.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/Poppins-Light.woff2" as="font" type="font/woff2" crossorigin>
+
+<link rel="preload" href="https://securepubads.g.doubleclick.net/tag/js/gpt.js" as="script" type="text/javascript" crossorigin>
+<script src="https://securepubads.g.doubleclick.net/tag/js/gpt.js" crossorigin="anonymous" async></script>
+	
+<link rel="preload" href="/wp-content/themes/norder-monetization/fonts/Poppins-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/wp-content/themes/norder-monetization/fonts/Poppins-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/wp-content/themes/norder-monetization/fonts/Poppins-Light.woff2" as="font" type="font/woff2" crossorigin>
 
 <?php wp_head(); ?>
 
@@ -22,8 +26,11 @@
 		color:<?php echo esc_attr(get_theme_mod('header_color_text','#FFF')); ?>;
 		text-decoration:none;
 	}
-	.entry-title a, .entry-categories a, .posted-on a {
+	#header .entry-title a, #header .entry-categories a, #header .posted-on a {
 		color:<?php echo esc_attr(get_theme_mod('header_color_text','#FFF')); ?>;
+	}
+	.entry-title a, .entry-categories a, .posted-on a {
+		color:<?php echo esc_attr(get_theme_mod('header_color','#000')); ?>;
 	}
 	#menu_topo > nav::before{
 		background: <?php echo esc_attr(get_theme_mod('header_color_text','#FFF')); ?>;

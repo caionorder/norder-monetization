@@ -734,3 +734,25 @@ a.link{
 	text-align:center;
 	text-transform:uppercase;
 }
+.placeholderAd{
+	display:flex;
+	justify-content: center;	
+}
+.placeholderAd > div {
+  align-items: center;
+  background-color: lightgrey;
+  display: flex;
+  justify-content: center;
+  min-height:250px;
+}
+
+.placeholderAd > div:empty::before {
+  background-color: dimgrey;
+  border-radius: 5px;
+  color: lightgrey;
+  content: "Ad";
+  font: 12px sans-serif;
+  padding: 3px;
+  text-align: center;
+  width: 20px;
+}
