@@ -23,6 +23,41 @@ Requires PHP: 7.0
 
 ==================
 
+
+== LiteSpped ==
+
+1. Add in Optimization -> [8] Settings
+
+#Exclusões de JS	
+gpt.js
+googletag
+theme.js
+initializeTheme
+
+#Exclusões de JS adiado/atrasado
+joinads
+adsbygoogle
+document.write
+gtag
+gtm
+dataLayer
+gpt
+ads
+googletag
+disableScroll
+waitSlotRender
+fadeOut
+enableScroll
+waitFor
+setupAdListener
+wrapper
+wrapper.init
+theme.js
+initializeTheme
+
+
+==================
+
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
