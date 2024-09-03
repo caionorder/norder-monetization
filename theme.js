@@ -169,11 +169,20 @@ const MetaPixel = {
     },
 
     trackPageView: function() {
-        trackEvent('ViewContent', this.config.pixelId, {
+        trackEvent('PageView', this.config.pixelId, {
             'currency': 'USD',
             'value': '0.01',
         });
+
+        // Track ViewContent after 10 seconds
+        setTimeout(() => {
+            trackEvent('ViewContent', this.config.pixelId, {
+                'currency': 'USD',
+                'value': '0.01',
+            });
+        },10000)
     },
+
 
     setupLinkTracking: function() {
         document.addEventListener('DOMContentLoaded', () => {
