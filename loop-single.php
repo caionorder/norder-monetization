@@ -65,7 +65,7 @@
     <!-- Seção: Últimos Posts -->
     <section class="latest-posts">
         <div class="head-card">
-            <h2 style="text-align:center;text-transform: uppercase;letter-spacing: 2px;"><?php esc_html_e('Relacionados', 'norder-monetization'); ?></h2>
+            <h2 style="text-align:center;text-transform: uppercase;letter-spacing: 2px;"><?php esc_html_e('Relacionados', 'norder-monetization'); ?></h2>
         </div>
         <div class="body-card">
         <?php

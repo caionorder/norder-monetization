@@ -318,11 +318,11 @@ function custom_image_setup() {
 }
 add_action('after_setup_theme', 'custom_image_setup');
 
-function custom_post_thumbnail($size = 'medium', $class = 'wp-post-image') {
+function custom_post_thumbnail($class = 'wp-post-image') {
     if (has_post_thumbnail()) {
-        the_post_thumbnail($size, array('class' => $class));
+        the_post_thumbnail('home-thumbnail', array('class' => $class));
     } else {
-        echo '<img src="' . esc_url(get_template_directory_uri() . '/images/default-thumbnail.jpg') . '" class="' . esc_attr($class) . '" width="300" height="200" alt="' . esc_attr__('Default Thumbnail', 'norder-monetization') . '">';
+        echo '<img src="' . esc_url(get_template_directory_uri() . '/default.webp') . '" class="' . esc_attr($class) . '" width="400" height="267" alt="' . esc_attr__('Default Thumbnail', 'norder-monetization') . '">';
     }
 }
 
@@ -477,3 +477,9 @@ function theme_meta_ads_customizer($wp_customize) {
     ));
 }
 add_action('customize_register', 'theme_meta_ads_customizer');
+
+
+function theme_add_custom_image_size() {
+    add_image_size('home-thumbnail', 400, 267, true); // Você pode ajustar esses números conforme necessário
+}
+add_action('after_setup_theme', 'theme_add_custom_image_size');

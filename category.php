@@ -22,7 +22,7 @@
 	                    <?php if (has_post_thumbnail()) : ?>
 	                        <div class="post-thumbnail">
 	                            <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
-	                                <?php the_post_thumbnail('medium_large', array('class' => 'img-fluid', 'alt' => get_the_title())); ?>
+									<?php custom_post_thumbnail(); ?>
 	                            </a>
 	                        </div>
 	                    <?php endif; ?>

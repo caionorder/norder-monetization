@@ -4,7 +4,7 @@ Theme URI: https://clubnews24.com/
 Description: Theme for monetization in Ads
 Author: Caio Norder
 Author URI: https://norder.dev
-Version: 1.0.2
+Version: 1.0.10
 Tags: blog
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -815,4 +815,11 @@ a.link{
     100%{
         transform:rotate(360deg)
     }
+}
+
+.post-thumbnail img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 3 / 2;
 }

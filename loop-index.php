@@ -28,7 +28,7 @@ get_header();
             <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
                 <?php if (has_post_thumbnail()) : ?>
                     <a href="<?php the_permalink(); ?>" class="post-thumbnail">
-                        <?php the_post_thumbnail('large'); ?>
+                    <?php custom_post_thumbnail(); ?>
                     </a>
                 <?php endif; ?>
                 <header class="entry-header">
