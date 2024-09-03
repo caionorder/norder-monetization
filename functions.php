@@ -134,6 +134,7 @@ function theme_customizer_options($wp_customize) {
         'footer_color_text' => __('Cor Texto do Rodapé', 'norder-monetization'),
         'body_color' => __('Cor do Corpo', 'norder-monetization'),
         'body_color_text' => __('Cor Texto do Corpo', 'norder-monetization'),
+        'body_color_title' => __('Cor Titulo do Corpo', 'norder-monetization'),
     );
 
     foreach ($color_settings as $setting => $label) {
@@ -483,3 +484,53 @@ function theme_add_custom_image_size() {
     add_image_size('home-thumbnail', 400, 267, true); // Você pode ajustar esses números conforme necessário
 }
 add_action('after_setup_theme', 'theme_add_custom_image_size');
+
+
+define('THEME_SLUG', 'norder-monetization'); // Substitua pelo slug do seu tema
+define('THEME_VERSION', wp_get_theme(THEME_SLUG)->get('Version'));
+
+function theme_check_update() {
+    $theme_slug = THEME_SLUG;
+    $current_version = THEME_VERSION;
+    $url = "https://raw.githubusercontent.com/caionorder/norder-monetization/main/version.json?ver=" . time();
+    $response = wp_remote_get($url, array('headers' => array('User-Agent' => 'WordPress/' . $theme_slug)));
+    if (!is_wp_error($response) && $response['response']['code'] == 200) {
+        $release_info = json_decode($response['body']);
+        if (version_compare($current_version, $release_info->version, '<')) {
+            update_option('theme_update_info', array(
+                'new_version' => $release_info->version,
+                'url' => 'https://github.com/caionorder/norder-monetization',
+                'package' => 'https://github.com/caionorder/norder-monetization/archive/main.zip'
+            ));
+        }
+    }
+}
+add_action('admin_init', 'theme_check_update');
+
+function theme_inject_update($transient) {
+    if (empty($transient->checked)) {
+        return $transient;
+    }
+    $update_info = get_option('theme_update_info');
+    if ($update_info) {
+        $theme_data = wp_get_theme(THEME_SLUG);
+        $obj = array(
+            'theme' => THEME_SLUG,
+            'new_version' => $update_info['new_version'],
+            'url' => $update_info['url'],
+            'package' => $update_info['package']
+        );
+        $transient->response[THEME_SLUG] = $obj;
+    }
+    return $transient;
+}
+add_filter('site_transient_update_themes', 'theme_inject_update');
+
+function theme_post_update($upgrader_object, $options) {
+    if ($options['action'] == 'update' && $options['type'] == 'theme') {
+        if (isset($options['themes']) && in_array(THEME_SLUG, $options['themes'])) {
+            delete_option('theme_update_info');
+        }
+    }
+}
+add_action('upgrader_process_complete', 'theme_post_update', 10, 2);

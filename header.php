@@ -30,7 +30,7 @@
 		color:<?php echo esc_attr(get_theme_mod('header_color_text','#FFF')); ?>;
 	}
 	.entry-title a, .entry-categories a, .posted-on a {
-		color:<?php echo esc_attr(get_theme_mod('header_color','#000')); ?>;
+		color:<?php echo esc_attr(get_theme_mod('body_color_title','#000')); ?>;
 	}
 	#menu_topo > nav::before{
 		background: <?php echo esc_attr(get_theme_mod('header_color_text','#FFF')); ?>;
