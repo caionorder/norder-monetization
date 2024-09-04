@@ -500,7 +500,7 @@ function theme_check_update() {
             update_option('theme_update_info', array(
                 'new_version' => $release_info->version,
                 'url' => 'https://github.com/caionorder/norder-monetization',
-                'package' => 'https://github.com/caionorder/norder-monetization/archive/main.zip'
+                'package' => 'https://github.com/caionorder/norder-monetization/archive/refs/heads/main.zip'
             ));
         }
     }
