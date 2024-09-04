@@ -180,7 +180,7 @@ const MetaPixel = {
                 'currency': 'USD',
                 'value': '0.01',
             });
-        },10000)
+        },10000);
     },
 
 
