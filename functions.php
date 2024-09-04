@@ -407,7 +407,7 @@ function theme_loader_customizer($wp_customize) {
 add_action('customize_register', 'theme_loader_customizer');
 
 function enqueue_theme_js() {
-    wp_enqueue_script('theme-js', get_template_directory_uri() . '/theme.js', array(), '1.0.0', true);
+    wp_enqueue_script('theme-js', get_template_directory_uri() . '/theme.js', array(), '1.1.3', true);
     
     $loader_active = get_theme_mod('loader_active', false);
     $meta_ads_active = get_theme_mod('meta_ads_active', false);
@@ -534,3 +534,16 @@ function theme_post_update($upgrader_object, $options) {
     }
 }
 add_action('upgrader_process_complete', 'theme_post_update', 10, 2);
+
+add_filter('upgrader_source_selection', 'rename_theme_folder', 10, 3);
+function rename_theme_folder($source, $remote_source, $upgrader) {
+    global $wp_filesystem;
+    $theme_slug = THEME_SLUG;
+    $new_source = str_replace('-main', '', $source); // Remove o sufixo -main
+
+    if ($wp_filesystem->move($source, $new_source)) {
+        return $new_source;
+    } else {
+        return new WP_Error('rename_failed', __('Renomear pasta do tema falhou.'));
+    }
+}
